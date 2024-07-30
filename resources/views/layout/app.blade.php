@@ -1,5 +1,10 @@
 @extends('adminlte::page')
 
+@section('plugins.Datatables', true)
+@push('css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+@endpush
+
 {{-- Extend and customize the browser title --}}
 
 @section('title')
