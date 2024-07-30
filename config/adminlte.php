@@ -329,6 +329,11 @@ return [
             'icon' => 'fas fa-list',
         ],
         [
+            'text' => 'Proyek',
+            'route' => 'proyek.index',
+            'icon' => 'fas fa-industry',
+        ],
+        [
             'text' => 'change_password',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',

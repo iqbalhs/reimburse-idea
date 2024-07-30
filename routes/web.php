@@ -10,6 +10,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('kategori', \App\Http\Controllers\KategoriController::class);
+    Route::resource('proyek', \App\Http\Controllers\ProyekController::class);
 });
 
 Route::middleware('auth')->group(function () {
