@@ -324,6 +324,12 @@ return [
         ],
         ['header' => 'REFERENSI DATA'],
         [
+            'text' => 'Reimburse',
+            'route' => 'reimburse.index',
+            'icon' => 'fas fa-file',
+        ],
+        ['header' => 'REFERENSI DATA'],
+        [
             'text' => 'Kategori',
             'route' => 'kategori.index',
             'icon' => 'fas fa-list',
