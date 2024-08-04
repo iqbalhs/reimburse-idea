@@ -12,7 +12,9 @@ class ReimburseController extends Controller
      */
     public function index()
     {
-        //
+        return view('reimburse.index', [
+            'reimburses' => Reimburse::all()
+        ]);
     }
 
     /**
@@ -20,7 +22,7 @@ class ReimburseController extends Controller
      */
     public function create()
     {
-        //
+        return view('reimburse.create');
     }
 
     /**
@@ -28,7 +30,11 @@ class ReimburseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50']
+        ]);
+        Reimburse::create($request->all());
+        return redirect()->route('reimburse.index');
     }
 
     /**
@@ -36,7 +42,7 @@ class ReimburseController extends Controller
      */
     public function show(Reimburse $reimburse)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -44,7 +50,7 @@ class ReimburseController extends Controller
      */
     public function edit(Reimburse $reimburse)
     {
-        //
+        return view('reimburse.edit', ['reimburse' => $reimburse]);
     }
 
     /**
@@ -52,7 +58,12 @@ class ReimburseController extends Controller
      */
     public function update(Request $request, Reimburse $reimburse)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:50']
+        ]);
+        $reimburse->update($request->all());
+        return redirect()->route('reimburse.index')
+            ->with('success', 'Reimburse berhasil diedit.');
     }
 
     /**
@@ -60,6 +71,7 @@ class ReimburseController extends Controller
      */
     public function destroy(Reimburse $reimburse)
     {
-        //
+        $reimburse->delete();
+        return redirect()->route('reimburse.index');
     }
 }
