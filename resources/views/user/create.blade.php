@@ -29,14 +29,14 @@
                         </div>
                         <div class="form-group">
                             <label for="role">Role</label>
-                            <select class="form-control @error('nip') is-invalid @enderror"
+                            <select class="form-control @error('role') is-invalid @enderror"
                                 name="role">
                                 <option value="superadmin">Superadmin</option>
                                 <option value="finance">Finance</option>
                                 <option value="hr">HR</option>
                                 <option value="karyawan">Karyawan</option>
                             </select>
-                            @error('nip')
+                            @error('role')
                             <span id="nip-error" class="error invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>

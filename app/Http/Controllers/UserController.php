@@ -43,7 +43,7 @@ class UserController extends Controller
                 'hr',
                 'karyawan',
             ])],
-            'nip' => ['required', 'numeric', 'max:10', 'unique:'.User::class],
+            'nip' => ['required', 'numeric', 'max_digits:10', 'unique:'.User::class],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Password::defaults()],
         ]);
@@ -90,7 +90,7 @@ class UserController extends Controller
                 'hr',
                 'karyawan',
             ])],
-            'nip' => ['required', 'numeric', 'max:10', 'unique:'.User::class],
+            'nip' => ['required', 'numeric', 'max_digits:10', 'unique:'.User::class],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique('users')->ignore($user)],
         ]);
 
