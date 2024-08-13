@@ -18,13 +18,54 @@
                     <div class="card-body">
                         @csrf
                         <div class="form-group">
-                            <label for="name">Reimburse</label>
-                            <input id="name"
+                            <label for="title">Judul</label>
+                            <input id="title"
                                    type="text"
-                                   name="name"
-                                   class="form-control @error('name') is-invalid @enderror">
-                            @error('name')
-                            <span id="name-error" class="error invalid-feedback">{{ $message }}</span>
+                                   name="title"
+                                   class="form-control @error('title') is-invalid @enderror">
+                            @error('title')
+                            <span id="title-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="project_id">Proyek</label>
+                            <select class="form-control @error('project_id') is-invalid @enderror"
+                                    name="project_id">
+                                @foreach($projects as $project)
+                                    <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('project_id')
+                            <span id="project_id-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="category_id">Kategori</label>
+                            <select class="form-control @error('category_id') is-invalid @enderror"
+                                    name="category_id">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                            <span id="category_id-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Tanggal</label>
+                            <input id="date"
+                                   type="date"
+                                   name="date"
+                                   class="form-control @error('date') is-invalid @enderror">
+                            @error('date')
+                            <span id="date-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="remark">Keterangan</label>
+                            <textarea class="form-control @error('remark') is-invalid @enderror" name="remark" id="" cols="30" rows="4"></textarea>
+                            @error('remark')
+                            <span id="remark-error" class="error invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
+use App\Models\Proyek;
 use App\Models\Reimburse;
 use Illuminate\Http\Request;
 
@@ -22,7 +24,10 @@ class ReimburseController extends Controller
      */
     public function create()
     {
-        return view('reimburse.create');
+        return view('reimburse.create', [
+            'projects' => Proyek::all(),
+            'categories' => Kategori::all()
+        ]);
     }
 
     /**
@@ -31,9 +36,17 @@ class ReimburseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'max:50']
+            'title' => ['required', 'max:50'],
+            'project_id' => ['required', 'integer', 'exists:proyek,id'],
+            'category_id' => ['required', 'integer', 'exists:kategori,id'],
+            'date' => ['required', 'date'],
+            'remark' => ['required', 'string', 'max:500'],
         ]);
-        Reimburse::create($request->all());
+        $reimburse = new Reimburse();
+        $reimburse->fill($request->all());
+        $reimburse->staff_id = auth()->user()->id;
+        $reimburse->generateKode();
+        $reimburse->save();
         return redirect()->route('reimburse.index');
     }
 

@@ -23,4 +23,9 @@ class Reimburse extends Model
 	    'status_hr',
 	    'status_finance',
     ];
+
+    public function generateKode()
+    {
+        $this->kode = 'RMB-' . date('YmdHis') . random_int(1, 9);
+    }
 }
