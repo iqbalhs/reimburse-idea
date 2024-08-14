@@ -10,7 +10,14 @@
 @php
     $heads = [
         'ID',
-        'Name',
+        'Kode',
+        'Judul',
+        'Kategori',
+        'Proyek',
+        'Jumlah',
+        'Status',
+        'HR',
+        'Finance',
         ['label' => 'Actions', 'no-export' => true, 'width' => 5],
     ];
 
@@ -39,7 +46,14 @@
                         @foreach($reimburses as $reimburse)
                             <tr>
                                 <td>{{ $reimburse->id }}</td>
-                                <td>{{ $reimburse->name }}</td>
+                                <td>{{ $reimburse->kode }}</td>
+                                <td>{{ $reimburse->title }}</td>
+                                <td>{{ $reimburse->kategori->name }}</td>
+                                <td>{{ $reimburse->proyek->name }}</td>
+                                <td>{{ $reimburse->jumlah_total }}</td>
+                                <td>{{ $reimburse->status_staff }}</td>
+                                <td>{{ $reimburse->status_hr }}</td>
+                                <td>{{ $reimburse->status_finance }}</td>
                                 <td>
                                     <a href="{{ route('reimburse.edit', $reimburse) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                         <i class="fa fa-lg fa-fw fa-pen"></i>
