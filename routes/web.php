@@ -13,6 +13,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('user', \App\Http\Controllers\UserController::class);
     Route::resource('proyek', \App\Http\Controllers\ProyekController::class);
     Route::resource('reimburse', \App\Http\Controllers\ReimburseController::class);
+    Route::get('/reimburse/{id}/create', [\App\Http\Controllers\ReimburseDetailController::class, 'create'])->name('reimburse-detail.create');
+    Route::post('/reimburse/{id}/create', [\App\Http\Controllers\ReimburseDetailController::class, 'store'])->name('reimburse-detail.store');
 });
 
 Route::middleware('auth')->group(function () {

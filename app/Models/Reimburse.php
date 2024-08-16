@@ -39,4 +39,15 @@ class Reimburse extends Model
     {
         return $this->hasOne(Proyek::class, 'id', 'project_id');
     }
+
+    public function reimburseDetail()
+    {
+        return $this->hasMany(ReimburseDetail::class, 'reimburse_id', 'id');
+    }
+
+    public function updateJumlah()
+    {
+        $this->jumlah_total = $this->reimburseDetail()->sum('jumlah');
+        return $this->save();
+    }
 }

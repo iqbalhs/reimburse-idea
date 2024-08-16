@@ -55,7 +55,7 @@ class ReimburseController extends Controller
      */
     public function show(Reimburse $reimburse)
     {
-        abort(404);
+        return view('reimburse.show', ['reimburse' => $reimburse]);
     }
 
     /**
