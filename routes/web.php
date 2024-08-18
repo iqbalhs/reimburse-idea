@@ -15,6 +15,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('reimburse', \App\Http\Controllers\ReimburseController::class);
     Route::get('/reimburse/{id}/create', [\App\Http\Controllers\ReimburseDetailController::class, 'create'])->name('reimburse-detail.create');
     Route::post('/reimburse/{id}/create', [\App\Http\Controllers\ReimburseDetailController::class, 'store'])->name('reimburse-detail.store');
+    Route::get('/reimburse-detail/{id}/edit', [\App\Http\Controllers\ReimburseDetailController::class, 'edit'])->name('reimburse-detail.edit');
+    Route::put('/reimburse-detail/{id}/edit', [\App\Http\Controllers\ReimburseDetailController::class, 'update'])->name('reimburse-detail.update');
+    Route::delete('/reimburse-detail/{id}/destroy', [\App\Http\Controllers\ReimburseDetailController::class, 'destroy'])->name('reimburse-detail.destroy');
 });
 
 Route::middleware('auth')->group(function () {

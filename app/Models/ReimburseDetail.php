@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class ReimburseDetail extends Model
 {
@@ -16,4 +17,18 @@ class ReimburseDetail extends Model
         'jumlah',
         'file_path',
     ];
+
+    public function reimburse()
+    {
+        return $this->hasOne(Reimburse::class, 'id', 'reimburse_id');
+    }
+
+    public function isImage()
+    {
+        if (!Storage::exists($this->file_path)) {
+            return false;
+        }
+        $extension = explode(separator: '.', string: $this->file_path)[1];
+        return in_array(needle: $extension, haystack: ['jpg', 'jpeg', 'png']);
+    }
 }

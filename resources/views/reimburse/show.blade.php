@@ -97,19 +97,24 @@
                             <tr>
                                 <td>{{ $detail->id }}</td>
                                 <td>{{ $detail->title }}</td>
-                                <td>{{ $detail->file_path }}</td>
+                                <td>
+                                    @if($detail->isImage())
+                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($detail->file_path) }}"
+                                        class="img-md">
+                                    @else
+                                        <a target="_blank" href="{{ \Illuminate\Support\Facades\Storage::url($detail->file_path) }}">
+                                            <i class="fas fas-file"></i> Download File
+                                        </a>
+                                    @endif
                                 <td>{{ $detail->jumlah }}</td>
                                 <td>
-                                    <a href="{{ route('reimburse.show', $detail) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-                                        <i class="fa fa-lg fa-fw fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('reimburse.edit', $detail) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                    <a href="{{ route('reimburse-detail.edit', $detail->id) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                         <i class="fa fa-lg fa-fw fa-pen"></i>
                                     </a>
-                                    <form action="{{ route('reimburse.destroy', $detail) }}" method="POST" >
+                                    <form action="{{ route('reimburse-detail.destroy', $detail->id) }}" method="POST" >
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
+                                        <button onclick="return confirm('Yakin akan hapus data?')" type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
                                             <i class="fa fa-lg fa-fw fa-trash"></i>
                                         </button>
                                     </form>
