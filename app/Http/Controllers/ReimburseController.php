@@ -65,7 +65,11 @@ class ReimburseController extends Controller
      */
     public function edit(Reimburse $reimburse)
     {
-        return view('reimburse.edit', ['reimburse' => $reimburse]);
+        return view('reimburse.edit', [
+            'reimburse' => $reimburse,
+            'projects' => Proyek::all(),
+            'categories' => Kategori::all()
+        ]);
     }
 
     /**
@@ -74,11 +78,15 @@ class ReimburseController extends Controller
     public function update(Request $request, Reimburse $reimburse)
     {
         $request->validate([
-            'name' => ['required', 'max:50']
+            'title' => ['required', 'max:50'],
+            'project_id' => ['required', 'integer', 'exists:proyek,id'],
+            'category_id' => ['required', 'integer', 'exists:kategori,id'],
+            'date' => ['required', 'date'],
+            'remark' => ['required', 'string', 'max:500'],
         ]);
-        $reimburse->update($request->all());
-        return redirect()->route('reimburse.index')
-            ->with('success', 'Reimburse berhasil diedit.');
+        $reimburse->fill($request->all());
+        $reimburse->save();
+        return redirect()->route('reimburse.index');
     }
 
     /**
