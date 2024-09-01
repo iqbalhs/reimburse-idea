@@ -4,7 +4,7 @@
 
 @section('subtitle', 'Welcome')
 @section('content_header_title', 'Pegawai')
-@section('content_header_subtitle', 'Index')
+@section('content_header_subtitle', 'Data Pegawai')
 
 {{-- Content body: main page content --}}
 @php
