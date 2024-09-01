@@ -4,7 +4,7 @@
 
 @section('subtitle', 'Welcome')
 @section('content_header_title', 'Pegawai')
-@section('content_header_subtitle', 'Tambah')
+@section('content_header_subtitle', 'Tambah Pegawai')
 
 @section('content_body')
 

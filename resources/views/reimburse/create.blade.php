@@ -3,8 +3,8 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Welcome')
-@section('content_header_title', 'Proyek')
-@section('content_header_subtitle', 'Tambah')
+@section('content_header_title', 'Reimburse')
+@section('content_header_subtitle', 'Tambah Reimburse')
 
 @section('content_body')
 

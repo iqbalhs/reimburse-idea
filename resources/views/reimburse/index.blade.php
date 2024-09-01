@@ -4,7 +4,7 @@
 
 @section('subtitle', 'Welcome')
 @section('content_header_title', 'Reimburse')
-@section('content_header_subtitle', 'Index')
+@section('content_header_subtitle', 'Daftar Reimburse')
 
 {{-- Content body: main page content --}}
 @php

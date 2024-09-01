@@ -4,7 +4,7 @@
 
 @section('subtitle', 'Welcome')
 @section('content_header_title', 'Kategori')
-@section('content_header_subtitle', 'Tambah')
+@section('content_header_subtitle', 'Tambah Kategori')
 
 @section('content_body')
 
