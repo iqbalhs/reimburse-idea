@@ -103,6 +103,11 @@
                                             </button>
                                         </form>
                                     @endcan
+                                    @can('financeFinish', $reimburse)
+                                        <a href="{{ route('reimburse.upload-proof', $reimburse) }}" class="btn btn-xs btn-default text-blue mx-1 shadow" title="Upload Bukti">
+                                            <i class="fa fa-lg fa-fw fa-file-alt"></i>
+                                        </a>
+                                    @endcan
                                     @can('delete', $reimburse)
                                         <form action="{{ route('reimburse.destroy', $reimburse) }}" method="POST" >
                                             @csrf

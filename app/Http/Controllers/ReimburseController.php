@@ -10,6 +10,7 @@ use App\Models\Kategori;
 use App\Models\Proyek;
 use App\Models\Reimburse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -154,6 +155,35 @@ class ReimburseController extends Controller
         $reimburse->status_finance = StatusHr::REJECT;
         $reimburse->status_hr = StatusHr::REJECT;
         $reimburse->status_staff = StatusKaryawan::DRAFT;
+        $reimburse->save();
+        return redirect()->route('reimburse.index');
+    }
+
+    public function uploadProof($id)
+    {
+        /** @var Reimburse $reimburse */
+        $reimburse = Reimburse::findOrFail($id);
+        return view('reimburse.upload-proof', [
+            'reimburse' => $reimburse,
+        ]);
+    }
+
+    public function storeProof(Request $request, $id)
+    {
+        /** @var Reimburse $reimburse */
+        $reimburse = Reimburse::findOrFail($id);
+        $request->validate([
+            'file' => [
+                'nullable',
+                \Illuminate\Validation\Rules\File::types(['pdf', 'jpeg', 'jpg', 'png'])
+                    ->max('2mb')
+            ],
+        ]);
+
+        /** @var UploadedFile $file */
+        $file = $request->file;
+        $reimburse->transfer_proof = $file->storeAs('berkas', sprintf("proof_%s.%s", uniqid('file'), $file->extension()));
+        $reimburse->status_finance = StatusFinance::FINISH;
         $reimburse->save();
         return redirect()->route('reimburse.index');
     }

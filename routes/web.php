@@ -18,6 +18,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/reimburse/{id}/hr-reject', [\App\Http\Controllers\ReimburseController::class, 'hrReject'])->name('reimburse.hr-reject');
     Route::post('/reimburse/{id}/finance-accept', [\App\Http\Controllers\ReimburseController::class, 'financeAccept'])->name('reimburse.finance-accept');
     Route::post('/reimburse/{id}/finance-reject', [\App\Http\Controllers\ReimburseController::class, 'financeReject'])->name('reimburse.finance-reject');
+    Route::get('/reimburse/{id}/upload-proof', [\App\Http\Controllers\ReimburseController::class, 'uploadProof'])->name('reimburse.upload-proof');
+    Route::post('/reimburse/{id}/store-proof', [\App\Http\Controllers\ReimburseController::class, 'storeProof'])->name('reimburse.store-proof');
     Route::get('/reimburse/{id}/create', [\App\Http\Controllers\ReimburseDetailController::class, 'create'])->name('reimburse-detail.create');
     Route::post('/reimburse/{id}/create', [\App\Http\Controllers\ReimburseDetailController::class, 'store'])->name('reimburse-detail.store');
     Route::get('/reimburse-detail/{id}/edit', [\App\Http\Controllers\ReimburseDetailController::class, 'edit'])->name('reimburse-detail.edit');

@@ -73,21 +73,26 @@ class ReimbursePolicy
 
     public function hrAccept(User $user, Reimburse $reimburse)
     {
-        return $reimburse->isKaryawanSent() && $user->hasRole(RolesEnum::HR);
+        return $reimburse->isKaryawanSent() && $user->hasRole(RolesEnum::HR) && !$reimburse->isHrAccept();
     }
 
     public function hrReject(User $user, Reimburse $reimburse)
     {
-        return $reimburse->isKaryawanSent() && $user->hasRole(RolesEnum::HR);
+        return $reimburse->isKaryawanSent() && $user->hasRole(RolesEnum::HR) && !$reimburse->isHrAccept();
     }
 
     public function financeAccept(User $user, Reimburse $reimburse)
     {
-        return $reimburse->isHrAccept() && $user->hasRole(RolesEnum::FINANCE);
+        return $reimburse->isHrAccept() && $user->hasRole(RolesEnum::FINANCE) && !$reimburse->isFinanceAccept() && !$reimburse->isFinanceFinish();
     }
 
     public function financeReject(User $user, Reimburse $reimburse)
     {
-        return $reimburse->isHrAccept() && $user->hasRole(RolesEnum::FINANCE);
+        return $reimburse->isHrAccept() && $user->hasRole(RolesEnum::FINANCE) && !$reimburse->isFinanceAccept() && !$reimburse->isFinanceFinish();
+    }
+
+    public function financeFinish(User $user, Reimburse $reimburse)
+    {
+        return $reimburse->isFinanceAccept();
     }
 }
