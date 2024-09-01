@@ -33,6 +33,7 @@ class ReimburseDetailController extends Controller
      */
     public function store(Request $request, $id)
     {
+        /** @var Reimburse $reimburse */
         $reimburse = Reimburse::findOrFail($id);
         $request->validate([
             'title' => ['required', 'max:50'],
@@ -77,6 +78,7 @@ class ReimburseDetailController extends Controller
     public function update(Request $request, $id)
     {
         $reimburseDetail = ReimburseDetail::findOrFail($id);
+        /** @var Reimburse $reimburse */
         $reimburse = $reimburseDetail->reimburse;
         $request->validate([
             'title' => ['required', 'max:50'],
@@ -108,9 +110,11 @@ class ReimburseDetailController extends Controller
     public function destroy($id)
     {
         $reimburseDetail = ReimburseDetail::findOrFail($id);
+        /** @var Reimburse $reimburse */
         $reimburse = $reimburseDetail->reimburse;
         Storage::delete($reimburseDetail->file_path);
         $reimburseDetail->delete();
+        $reimburse->updateJumlah();
         return redirect()->route('reimburse.show', $reimburse);
     }
 }

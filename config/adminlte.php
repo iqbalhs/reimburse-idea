@@ -317,10 +317,8 @@ return [
         ],
         [
             'text' => 'Dashboard',
-            'url' => 'admin/pages',
+            'route' => 'dashboard',
             'icon' => 'fas fa-home',
-            'label' => 4,
-            'label_color' => 'success',
         ],
         ['header' => 'PENGAJUAN'],
         [

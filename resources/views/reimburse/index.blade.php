@@ -58,16 +58,60 @@
                                     <a href="{{ route('reimburse.show', $reimburse) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                         <i class="fa fa-lg fa-fw fa-eye"></i>
                                     </a>
+                                    @can('edit', $reimburse)
                                     <a href="{{ route('reimburse.edit', $reimburse) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                         <i class="fa fa-lg fa-fw fa-pen"></i>
                                     </a>
-                                    <form action="{{ route('reimburse.destroy', $reimburse) }}" method="POST" >
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
-                                            <i class="fa fa-lg fa-fw fa-trash"></i>
-                                        </button>
-                                    </form>
+                                    @endcan
+                                    @can('sendReimburse', $reimburse)
+                                        <form action="{{ route('reimburse.send', $reimburse) }}" method="POST" >
+                                            @csrf
+                                            <button type="submit" class="btn btn-xs btn-default text-success mx-1 shadow" onclick="return confirm ('Yakin akan mengirim reimburse? informasi tidak bisa diubah setelah dikirim.')" title="Send">
+                                                <i class="fa fa-lg fa-fw fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
+                                    @can('hrAccept', $reimburse)
+                                        <form action="{{ route('reimburse.hr-accept', $reimburse) }}" method="POST" >
+                                            @csrf
+                                            <button type="submit" class="btn btn-xs btn-default text-success mx-1 shadow" onclick="return confirm ('Yakin akan menyetujui reimburse dan kirim ke finance?')" title="Send">
+                                                <i class="fa fa-lg fa-fw fa-check-circle"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
+                                    @can('hrReject', $reimburse)
+                                        <form action="{{ route('reimburse.hr-reject', $reimburse) }}" method="POST" >
+                                            @csrf
+                                            <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" onclick="return confirm ('Yakin akan menolak reimburse dan kirim kembali ke karyawan?')" title="Send">
+                                                <i class="fa fa-lg fa-fw fa-times-circle"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
+                                    @can('financeAccept', $reimburse)
+                                        <form action="{{ route('reimburse.finance-accept', $reimburse) }}" method="POST" >
+                                            @csrf
+                                            <button type="submit" class="btn btn-xs btn-default text-success mx-1 shadow" onclick="return confirm ('Yakin akan menyetujui reimburse?')" title="Send">
+                                                <i class="fa fa-lg fa-fw fa-check-circle"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
+                                    @can('financeReject', $reimburse)
+                                        <form action="{{ route('reimburse.finance-reject', $reimburse) }}" method="POST" >
+                                            @csrf
+                                            <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" onclick="return confirm ('Yakin akan menolak reimburse dan kirim kembali ke karyawan?')" title="Send">
+                                                <i class="fa fa-lg fa-fw fa-times-circle"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
+                                    @can('delete', $reimburse)
+                                        <form action="{{ route('reimburse.destroy', $reimburse) }}" method="POST" >
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
+                                                <i class="fa fa-lg fa-fw fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

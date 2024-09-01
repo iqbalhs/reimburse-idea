@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\RolesEnum;
+use App\Enums\StatusFinance;
+use App\Enums\StatusHr;
+use App\Enums\StatusKaryawan;
 use App\Models\Kategori;
 use App\Models\Proyek;
 use App\Models\Reimburse;
@@ -16,8 +20,16 @@ class ReimburseController extends Controller
      */
     public function index()
     {
+        $reimburses = Reimburse::query();
+        if (auth()->user()->hasRole(RolesEnum::HR)) {
+            $reimburses->hrViewable();
+        }
+        if (auth()->user()->hasRole(RolesEnum::FINANCE)) {
+            $reimburses->financeViewable();
+        }
+
         return view('reimburse.index', [
-            'reimburses' => Reimburse::all()
+            'reimburses' => $reimburses->get()
         ]);
     }
 
@@ -95,6 +107,54 @@ class ReimburseController extends Controller
     public function destroy(Reimburse $reimburse)
     {
         $reimburse->delete();
+        return redirect()->route('reimburse.index');
+    }
+
+    public function send($id)
+    {
+        /** @var Reimburse $reimburse */
+        $reimburse = Reimburse::findOrFail($id);
+        $reimburse->status_staff = StatusKaryawan::SENT;
+        $reimburse->save();
+        return redirect()->route('reimburse.index');
+    }
+
+    public function hrAccept($id)
+    {
+        /** @var Reimburse $reimburse */
+        $reimburse = Reimburse::findOrFail($id);
+        $reimburse->status_hr = StatusHr::ACCEPT;
+        $reimburse->save();
+        return redirect()->route('reimburse.index');
+    }
+
+    public function hrReject($id)
+    {
+        /** @var Reimburse $reimburse */
+        $reimburse = Reimburse::findOrFail($id);
+        $reimburse->status_hr = StatusHr::REJECT;
+        $reimburse->status_staff = StatusKaryawan::DRAFT;
+        $reimburse->save();
+        return redirect()->route('reimburse.index');
+    }
+
+    public function financeAccept($id)
+    {
+        /** @var Reimburse $reimburse */
+        $reimburse = Reimburse::findOrFail($id);
+        $reimburse->status_finance = StatusFinance::ACCEPT;
+        $reimburse->save();
+        return redirect()->route('reimburse.index');
+    }
+
+    public function financeReject($id)
+    {
+        /** @var Reimburse $reimburse */
+        $reimburse = Reimburse::findOrFail($id);
+        $reimburse->status_finance = StatusHr::REJECT;
+        $reimburse->status_hr = StatusHr::REJECT;
+        $reimburse->status_staff = StatusKaryawan::DRAFT;
+        $reimburse->save();
         return redirect()->route('reimburse.index');
     }
 }
