@@ -48,8 +48,8 @@
                                 <td>{{ $reimburse->id }}</td>
                                 <td>{{ $reimburse->kode }}</td>
                                 <td>{{ $reimburse->title }}</td>
-                                <td>{{ $reimburse->kategori->name }}</td>
-                                <td>{{ $reimburse->proyek->name }}</td>
+                                <td>{{ @$reimburse->kategori->name }}</td>
+                                <td>{{ @$reimburse->proyek->name }}</td>
                                 <td>{{ $reimburse->jumlah_total }}</td>
                                 <td>{{ $reimburse->status_staff }}</td>
                                 <td>{{ $reimburse->status_hr }}</td>
@@ -112,7 +112,7 @@
                                         <form action="{{ route('reimburse.destroy', $reimburse) }}" method="POST" >
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
+                                            <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" onclick="return confirm ('Yakin akan menghapus data?')" title="Delete">
                                                 <i class="fa fa-lg fa-fw fa-trash"></i>
                                             </button>
                                         </form>

@@ -21,7 +21,7 @@
     $btnDelete = '<a class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
                       <i class="fa fa-lg fa-fw fa-trash"></i>
                   </a>';
-    $btnDetails = '<a class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
+   $btnDetails = '<a class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
                        <i class="fa fa-lg fa-fw fa-eye"></i>
                    </a>';
 @endphp

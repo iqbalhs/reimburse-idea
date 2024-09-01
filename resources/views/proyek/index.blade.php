@@ -47,7 +47,7 @@
                                     <form action="{{ route('proyek.destroy', $proyek) }}" method="POST" >
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
+                                        <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow"onclick="return confirm ('Yakin akan menghapus data?')" title="Delete">
                                             <i class="fa fa-lg fa-fw fa-trash"></i>
                                         </button>
                                     </form>
