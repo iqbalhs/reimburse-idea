@@ -31,6 +31,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
+                        <a href="{{ route('kategori.index') }}" class="btn btn-warning c">Kembali</a>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>

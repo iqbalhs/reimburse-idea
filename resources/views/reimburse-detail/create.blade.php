@@ -50,6 +50,7 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="{{ route('reimburse.show', $reimburse->id) }}" class="btn btn-warning">Kembali</a>
                     </div>
                 </form>
             </div>

@@ -9,7 +9,7 @@
 {{-- Content body: main page content --}}
 @php
     $heads = [
-        'ID',
+        'NO',
         'Kode',
         'Judul',
         'Kategori',
@@ -45,7 +45,7 @@
                     <x-adminlte-datatable id="table1" :heads="$heads">
                         @foreach($reimburses as $reimburse)
                             <tr>
-                                <td>{{ $reimburse->id }}</td>
+                                <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $reimburse->kode }}</td>
                                 <td>{{ $reimburse->title }}</td>
                                 <td>{{ @$reimburse->kategori->name }}</td>

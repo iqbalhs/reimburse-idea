@@ -35,6 +35,7 @@
                     <h3 class="card-title">Reimburse - {{ $reimburse->id }}</h3>
                 </div>
                 <div class="card-body">
+                    <a href="{{ route('reimburse.index') }}" class="btn btn-warning mb-1">Kembali</a>
                     <table class="table table-bordered table-sm">
                         <tr>
                             <th>Kode</th>

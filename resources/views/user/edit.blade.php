@@ -72,6 +72,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
+                    <a href="{{ route('user.index') }}" class="btn btn-warning">Kembali</a>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>

@@ -23,7 +23,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Daftar Proyek</h3>
+                    <h2 class="card-title">Daftar Pegawai</h2>
                     <a href="{{ route('user.create') }}" class="float-right btn btn-primary"><i class="fa fa-plus"></i></a>
                 </div>
                 <div class="card-body">
