@@ -331,16 +331,19 @@ return [
             'text' => 'Kategori',
             'route' => 'kategori.index',
             'icon' => 'fas fa-list',
+            'can' => 'crud kategori'
         ],
         [
             'text' => 'Proyek',
             'route' => 'proyek.index',
             'icon' => 'fas fa-industry',
+            'can' => 'crud proyek'
         ],
         [
             'text' => 'Pegawai',
             'route' => 'user.index',
             'icon' => 'fas fa-users',
+            'can' => 'crud user'
         ],
     ],
 
