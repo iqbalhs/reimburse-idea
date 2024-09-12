@@ -71,6 +71,8 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="/reimburse" class="btn btn-secondary">Cancel</a>
+                        </div>
                     </div>
                 </form>
             </div>
