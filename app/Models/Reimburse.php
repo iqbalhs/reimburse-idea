@@ -14,10 +14,14 @@ class Reimburse extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'kode_reimburse';
+
+    protected $keyType = 'string';
+
     protected $table = 'reimburse';
 
     protected $fillable = [
-        'kode',
+        'kode_reimburse',
 	    'project_id',
 	    'category_id',
 	    'staff_id',
@@ -31,23 +35,23 @@ class Reimburse extends Model
 
     public function generateKode()
     {
-        $this->kode = 'RMB-' . date('YmdHis') . random_int(1, 9);
+        $this->kode_reimburse = 'RMB-' . date('YmdHis') . random_int(1, 9);
     }
 
     public function kategori()
     {
-        return $this->hasOne(Kategori::class, 'id', 'category_id');
+        return $this->hasOne(Kategori::class, 'category_id', 'category_id');
     }
 
 
     public function proyek()
     {
-        return $this->hasOne(Proyek::class, 'id', 'project_id');
+        return $this->hasOne(Proyek::class, 'proyek_id', 'project_id');
     }
 
     public function reimburseDetail()
     {
-        return $this->hasMany(ReimburseDetail::class, 'reimburse_id', 'id');
+        return $this->hasMany(ReimburseDetail::class, 'kode_reimburse', 'kode_reimburse');
     }
 
     public function updateJumlah()

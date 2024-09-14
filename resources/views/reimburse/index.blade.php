@@ -55,7 +55,7 @@
                                 <td>{{ $reimburse->status_hr }}</td>
                                 <td>{{ $reimburse->status_finance }}</td>
                                 <td>
-                                    <a href="{{ route('reimburse.show', $reimburse) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                    <a href="{{ route('reimburse.show', $reimburse->kode_reimburse) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                         <i class="fa fa-lg fa-fw fa-eye"></i>
                                     </a>
                                     @can('edit', $reimburse)

@@ -28,7 +28,6 @@ class ReimburseController extends Controller
         if (auth()->user()->hasRole(RolesEnum::FINANCE)) {
             $reimburses->financeViewable();
         }
-
         return view('reimburse.index', [
             'reimburses' => $reimburses->get()
         ]);

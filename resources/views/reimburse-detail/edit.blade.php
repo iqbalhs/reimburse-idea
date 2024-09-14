@@ -14,7 +14,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Tambah Detail Reimburse</h3>
                 </div>
-                <form method="POST" enctype="multipart/form-data" action="{{ route('reimburse-detail.edit', $reimburseDetail->id) }}">
+                <form method="POST" enctype="multipart/form-data" action="{{ route('reimburse-detail.edit', $reimburseDetail->id_reimburse_detail) }}">
                     <div class="card-body">
                         @csrf
                         @method('PUT')

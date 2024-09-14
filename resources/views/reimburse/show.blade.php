@@ -32,14 +32,14 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Reimburse - {{ $reimburse->id }}</h3>
+                    <h3 class="card-title">Reimburse - {{ $reimburse->kode_reimburse }}</h3>
                 </div>
                 <div class="card-body">
                     <a href="{{ route('reimburse.index') }}" class="btn btn-warning mb-1">Kembali</a>
                     <table class="table table-bordered table-sm">
                         <tr>
                             <th>Kode</th>
-                            <td> {{ $reimburse->kode }} </td>
+                            <td> {{ $reimburse->kode_reimburse }} </td>
                         </tr>
                         <tr>
                             <th>Proyek</th>
@@ -67,15 +67,15 @@
                             <td> {{ $reimburse->remark }} </td>
                         </tr>
                         <tr>
-                            <th>Status</th>
+                            <th>Status Staff</th>
                             <td> {{ $reimburse->status_staff }} </td>
                         </tr>
                         <tr>
-                            <th>HR</th>
+                            <th>Status HR</th>
                             <td> {{ $reimburse->status_hr }} </td>
                         </tr>
                         <tr>
-                            <th>Finance</th>
+                            <th>Status Finance</th>
                             <td> {{ $reimburse->status_finance }} </td>
                         </tr>
                     </table>
@@ -109,10 +109,10 @@
                                     @endif
                                 <td>{{ $detail->jumlah }}</td>
                                 <td>
-                                    <a href="{{ route('reimburse-detail.edit', $detail->id) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                    <a href="{{ route('reimburse-detail.edit', $detail->id_reimburse_detail) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                         <i class="fa fa-lg fa-fw fa-pen"></i>
                                     </a>
-                                    <form action="{{ route('reimburse-detail.destroy', $detail->id) }}" method="POST" >
+                                    <form action="{{ route('reimburse-detail.destroy', $detail->id_reimburse_detail) }}" method="POST" >
                                         @csrf
                                         @method('DELETE')
                                         <button onclick="return confirm('Yakin akan hapus data?')" type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">

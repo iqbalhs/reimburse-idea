@@ -12,6 +12,8 @@ class ReimburseDetail extends Model
 
     protected $table = 'reimburse_detail';
 
+    protected $primaryKey = 'id_reimburse_detail';
+
     protected $fillable = [
         'title',
         'jumlah',
@@ -20,7 +22,7 @@ class ReimburseDetail extends Model
 
     public function reimburse()
     {
-        return $this->hasOne(Reimburse::class, 'id', 'reimburse_id');
+        return $this->hasOne(Reimburse::class, 'kode_reimburse', 'kode_reimburse');
     }
 
     public function isImage()
