@@ -4,7 +4,7 @@
 
 @section('subtitle', 'Welcome')
 @section('content_header_title', 'Proyek')
-@section('content_header_subtitle', 'Edit - ' . $proyek->id)
+@section('content_header_subtitle', 'Edit - ' . $proyek->proyek_id)
 
 @section('content_body')
 
@@ -14,7 +14,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Tambah Proyek</h3>
                 </div>
-                <form method="POST" action="{{ route('proyek.update', $proyek) }}">
+                <form method="POST" action="{{ route('proyek.update', $proyek->proyek_id) }}">
                     @method('PUT')
                     <div class="card-body">
                         @csrf

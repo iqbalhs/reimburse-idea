@@ -4,7 +4,7 @@
 
 @section('subtitle', 'Welcome')
 @section('content_header_title', 'Kategori')
-@section('content_header_subtitle', 'Edit - ' . $kategori->id)
+@section('content_header_subtitle', 'Edit - ' . $kategori->category_id)
 
 @section('content_body')
 
@@ -14,7 +14,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Tambah Kategori</h3>
                 </div>
-                <form method="POST" action="{{ route('kategori.update', $kategori) }}">
+                <form method="POST" action="{{ route('kategori.update', $kategori->category_id) }}">
                     @method('PUT')
                     <div class="card-body">
                         @csrf

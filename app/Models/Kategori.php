@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kategori extends Model
 {
-    use HasFactory;
+   use HasFactory;
+
+   protected $primaryKey = 'category_id';
 
     protected $table = 'kategori';
 

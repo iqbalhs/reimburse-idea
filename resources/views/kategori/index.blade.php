@@ -9,7 +9,7 @@
 {{-- Content body: main page content --}}
 @php
     $heads = [
-        'ID',
+        'No',
         'Name',
         ['label' => 'Actions', 'no-export' => true, 'width' => 5],
     ];
@@ -38,13 +38,13 @@
                     <x-adminlte-datatable id="table1" :heads="$heads">
                         @foreach($kategoris as $kategori)
                             <tr>
-                                <td>{{ $kategori->id }}</td>
+                                <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $kategori->name }}</td>
                                 <td>
-                                    <a href="{{ route('kategori.edit', $kategori) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                    <a href="{{ route('kategori.edit', $kategori->category_id) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                         <i class="fa fa-lg fa-fw fa-pen"></i>
                                     </a>
-                                    <form action="{{ route('kategori.destroy', $kategori) }}" method="POST" >
+                                    <form action="{{ route('kategori.destroy', $kategori->category_id) }}" method="POST" >
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" onclick="return confirm ('Yakin akan menghapus data?')"title="Delete">

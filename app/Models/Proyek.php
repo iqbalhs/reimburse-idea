@@ -9,6 +9,8 @@ class Proyek extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'proyek_id';
+
     protected $table = 'Proyek';
 
     protected $attributes = [
