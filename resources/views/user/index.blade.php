@@ -9,9 +9,9 @@
 {{-- Content body: main page content --}}
 @php
     $heads = [
-        'ID',
-        'Name',
+        'No',
         'NIP',
+        'Name',
         'Email',
         'Role',
         ['label' => 'Actions', 'no-export' => true, 'width' => 5],
@@ -31,9 +31,9 @@
                     <x-adminlte-datatable id="table1" :heads="$heads">
                         @foreach($users as $user)
                             <tr>
-                                <td>{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
+                                <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $user->nip }}</td>
+                                <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->getRoleNames()->implode(',') }}</td>
                                 <td>
