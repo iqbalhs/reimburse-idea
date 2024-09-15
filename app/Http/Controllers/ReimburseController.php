@@ -58,7 +58,7 @@ class ReimburseController extends Controller
         ]);
         $reimburse = new Reimburse();
         $reimburse->fill($request->all());
-        $reimburse->staff_id = auth()->user()->id;
+        $reimburse->nip = auth()->user()->nip;
         $reimburse->generateKode();
         $reimburse->save();
         return redirect()->route('reimburse.index');
