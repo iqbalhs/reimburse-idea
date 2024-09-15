@@ -51,8 +51,8 @@ class ReimburseController extends Controller
     {
         $request->validate([
             'title' => ['required', 'max:50'],
-            'project_id' => ['required', 'integer', 'exists:proyek,id'],
-            'category_id' => ['required', 'integer', 'exists:kategori,id'],
+            'project_id' => ['required', 'integer', 'exists:proyek,proyek_id'],
+            'category_id' => ['required', 'integer', 'exists:kategori,category_id'],
             'date' => ['required', 'date'],
             'remark' => ['required', 'string', 'max:500'],
         ]);
@@ -91,8 +91,8 @@ class ReimburseController extends Controller
     {
         $request->validate([
             'title' => ['required', 'max:50'],
-            'project_id' => ['required', 'integer', 'exists:proyek,id'],
-            'category_id' => ['required', 'integer', 'exists:kategori,id'],
+            'project_id' => ['required', 'integer', 'exists:proyek,proyek_id'],
+            'category_id' => ['required', 'integer', 'exists:kategori,category_id'],
             'date' => ['required', 'date'],
             'remark' => ['required', 'string', 'max:500'],
         ]);
