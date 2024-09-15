@@ -34,7 +34,7 @@
                             <select class="form-control @error('project_id') is-invalid @enderror"
                                     name="project_id">
                                 @foreach($projects as $project)
-                                    <option value="{{ $project->id }}" @if($project->id === $reimburse->project_id) selected @endif>{{ $project->name }}</option>
+                                    <option value="{{ $project->project_id }}" @if($project->id === $reimburse->project_id) selected @endif>{{ $project->name }}</option>
                                 @endforeach
                             </select>
                             @error('project_id')
@@ -46,7 +46,7 @@
                             <select class="form-control @error('category_id') is-invalid @enderror"
                                     name="category_id">
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" @if($category->id === $reimburse->category_id) selected @endif>{{ $category->name }}</option>
+                                    <option value="{{ $category->category_id }}" @if($category->id === $reimburse->category_id) selected @endif>{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')

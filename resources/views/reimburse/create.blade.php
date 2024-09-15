@@ -32,7 +32,7 @@
                             <select class="form-control @error('project_id') is-invalid @enderror"
                                     name="project_id">
                                 @foreach($projects as $project)
-                                    <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                    <option value="{{ $project->proyek_id }}">{{ $project->name }}</option>
                                 @endforeach
                             </select>
                             @error('project_id')
@@ -44,7 +44,7 @@
                             <select class="form-control @error('category_id') is-invalid @enderror"
                                     name="category_id">
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->category_id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')
