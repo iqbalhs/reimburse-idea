@@ -12,6 +12,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('kategori', \App\Http\Controllers\KategoriController::class);
     Route::resource('user', \App\Http\Controllers\UserController::class);
     Route::resource('proyek', \App\Http\Controllers\ProyekController::class);
+    Route::get('/reimburse/report', [\App\Http\Controllers\ReimburseController::class, 'report'])->name('reimburse.report');
+    Route::post('/reimburse/report', [\App\Http\Controllers\ReimburseController::class, 'exportReport'])->name('reimburse.export-report');
     Route::resource('reimburse', \App\Http\Controllers\ReimburseController::class);
     Route::post('/reimburse/{id}/send', [\App\Http\Controllers\ReimburseController::class, 'send'])->name('reimburse.send');
     Route::post('/reimburse/{id}/hr-accept', [\App\Http\Controllers\ReimburseController::class, 'hrAccept'])->name('reimburse.hr-accept');

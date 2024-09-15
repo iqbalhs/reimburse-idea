@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class ReimburseController extends Controller
 {
@@ -185,5 +187,76 @@ class ReimburseController extends Controller
         $reimburse->status_finance = StatusFinance::FINISH;
         $reimburse->save();
         return redirect()->route('reimburse.index');
+    }
+
+    public function report()
+    {
+        return view('reimburse.report', [
+            'projects' => Proyek::all(),
+            'categories' => Kategori::all()
+        ]);
+    }
+
+    public function exportReport(Request $request)
+    {
+        $request->validate([
+            'proyek_id' => ['nullable'],
+            'category_id' => ['nullable'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date'],
+        ]);
+
+        $this->exportExcel($request);
+    }
+
+    private function exportExcel(Request $request)
+    {
+        $reimburses = Reimburse::query();
+        $reimburses->whereBetween(
+            column: 'date',
+            values: [$request->start_date, $request->end_date]
+        );
+        if (!empty($request->proyek_id)) {
+            $reimburses->where('proyek_id', $request->proyek_id);
+        }
+        if (!empty($request->category_id)) {
+            $reimburses->where('category_id', $request->category_id);
+        }
+        clock($request->all());
+        $spreadsheet = new Spreadsheet();
+
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A1', 'Laporan Reimburse');
+        $sheet->getStyle('A1')->getFont()->setBold(true);
+        $sheet->setCellValue('A2', 'NO')
+            ->setCellValue('B2', 'Kode')
+            ->setCellValue('C2', 'Judul')
+            ->setCellValue('D2', 'Kategori')
+            ->setCellValue('E2', 'Proyek')
+            ->setCellValue('F2', 'Jumlah')
+            ->setCellValue('G2', 'Status')
+            ->setCellValue('H2', 'HR')
+            ->setCellValue('I2', 'Finance');
+        $row = 3;
+        $i = 1;
+        foreach ($reimburses->get() as $reimburse) {
+            $sheet->setCellValue("A$row", $i++)
+                ->setCellValue("B$row", $reimburse->kode_reimburse)
+                ->setCellValue("C$row", $reimburse->title)
+                ->setCellValue("D$row", $reimburse->kategori->name)
+                ->setCellValue("E$row", $reimburse->proyek->name)
+                ->setCellValue("F$row", $reimburse->jumlah_total)
+                ->setCellValue("G$row", $reimburse->status_staff)
+                ->setCellValue("H$row", $reimburse->status_hr)
+                ->setCellValue("I$row", $reimburse->status_finance);
+            $row++;
+        }
+
+        $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
+        $fileName = 'Report.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="'. urlencode($fileName).'"');
+        $writer->save('php://output');
     }
 }

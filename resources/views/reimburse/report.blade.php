@@ -3,8 +3,8 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Welcome')
-@section('content_header_title', 'Proyek')
-@section('content_header_subtitle', 'Tambah')
+@section('content_header_title', 'Reimburse')
+@section('content_header_subtitle', 'Laporan')
 
 @section('content_body')
 
@@ -12,29 +12,18 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Tambah Reimburse</h3>
+                    <h3 class="card-title">Export Laporan</h3>
                 </div>
-                <form method="POST" action="{{ route('reimburse.update', $reimburse) }}">
+                <form method="POST" action="{{ route('reimburse.report') }}">
                     <div class="card-body">
                         @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="title">Judul</label>
-                            <input id="title"
-                                   type="text"
-                                   name="title"
-                                   value="{{ $reimburse->title }}"
-                                   class="form-control @error('title') is-invalid @enderror">
-                            @error('title')
-                            <span id="title-error" class="error invalid-feedback">{{ $message }}</span>
-                            @enderror
-                        </div>
                         <div class="form-group">
                             <label for="project_id">Proyek</label>
                             <select class="form-control @error('project_id') is-invalid @enderror"
                                     name="project_id">
+                                <option value="">- Semua -</option>
                                 @foreach($projects as $project)
-                                    <option value="{{ $project->proyek_id }}" @if($project->id === $reimburse->proyek_id) selected @endif>{{ $project->name }}</option>
+                                    <option value="{{ $project->proyek_id }}">{{ $project->name }}</option>
                                 @endforeach
                             </select>
                             @error('project_id')
@@ -45,8 +34,9 @@
                             <label for="category_id">Kategori</label>
                             <select class="form-control @error('category_id') is-invalid @enderror"
                                     name="category_id">
+                                <option value="">- Semua -</option>
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->category_id }}" @if($category->id === $reimburse->category_id) selected @endif>{{ $category->name }}</option>
+                                    <option value="{{ $category->category_id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')
@@ -54,25 +44,28 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="date">Tanggal</label>
-                            <input id="date"
+                            <label for="start_date">Tanggal Mulai</label>
+                            <input id="start_date"
                                    type="date"
-                                   name="date"
-                                   value="{{ $reimburse->date }}"
-                                   class="form-control @error('date') is-invalid @enderror">
-                            @error('date')
+                                   name="start_date"
+                                   class="form-control @error('start_date') is-invalid @enderror">
+                            @error('start_date')
                             <span id="date-error" class="error invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="remark">Keterangan</label>
-                            <textarea class="form-control @error('remark') is-invalid @enderror" name="remark" id="" cols="30" rows="4">{{ $reimburse->remark }}</textarea>
-                            @error('remark')
-                            <span id="remark-error" class="error invalid-feedback">{{ $message }}</span>
+                            <label for="end_date">Tanggal Akhir</label>
+                            <input id="end_date"
+                                   type="date"
+                                   name="end_date"
+                                   class="form-control @error('end_date') is-invalid @enderror">
+                            @error('end_date')
+                            <span id="date-error" class="error invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                     <div class="card-footer">
+                        <a href="{{ route('kategori.index') }}" class="btn btn-warning">Kembali</a>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
