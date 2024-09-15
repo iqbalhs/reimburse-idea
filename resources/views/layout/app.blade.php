@@ -53,6 +53,7 @@
     <script>
         $('#jumlah').inputmask()
     </script>
+    @yield('userjs')
 @endpush
 
 
