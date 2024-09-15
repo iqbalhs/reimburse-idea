@@ -14,7 +14,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Tambah Detail Reimburse</h3>
                 </div>
-                <form method="POST" enctype="multipart/form-data" action="{{ route('reimburse-detail.store', $reimburse->id) }}">
+                <form method="POST" enctype="multipart/form-data" action="{{ route('reimburse-detail.store', $reimburse->kode_reimburse) }}">
                     <div class="card-body">
                         @csrf
                         <div class="form-group">
@@ -30,8 +30,9 @@
                         <div class="form-group">
                             <label for="jumlah">Jumlah</label>
                             <input id="jumlah"
-                                   type="number"
+                                   type="text"
                                    name="jumlah"
+                                   data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digitsOptional': true, 'placeholder': '0', 'removeMaskOnSubmit': true"
                                    class="form-control @error('jumlah') is-invalid @enderror">
                             @error('jumlah')
                             <span id="jumlah-error" class="error invalid-feedback">{{ $message }}</span>
@@ -50,10 +51,15 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="{{ route('reimburse.show', $reimburse->id) }}" class="btn btn-warning">Kembali</a>
+                        <a href="{{ route('reimburse.show', $reimburse->kode_reimburse) }}" class="btn btn-warning">Kembali</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 @stop
+@push('js-user')
+    <script>
+        $('#jumlah').inputmask()
+    </script>
+@endpush

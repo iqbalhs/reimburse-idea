@@ -8,7 +8,7 @@
 
 @php
     $heads = [
-        'ID',
+        'No',
         'Judul',
         'Berkas',
         'Jumlah',
@@ -60,7 +60,7 @@
 
                         <tr>
                             <th>Jumlah</th>
-                            <td> {{ $reimburse->jumlah_total }} </td>
+                            <td> {{ Number::format($reimburse->jumlah_total) }} </td>
                         </tr>
                         <tr>
                             <th>Keterangan</th>
@@ -96,19 +96,22 @@
                     <x-adminlte-datatable id="table1" :heads="$heads">
                         @foreach($reimburse->reimburseDetail as $detail)
                             <tr>
-                                <td>{{ $detail->id }}</td>
+                                <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $detail->title }}</td>
                                 <td>
                                     @if($detail->isImage())
-                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($detail->file_path) }}"
-                                        class="img-md">
+                                        <a href="{{ \Illuminate\Support\Facades\Storage::url($detail->file_path) }}" target="_blank">
+                                            <img src="{{ \Illuminate\Support\Facades\Storage::url($detail->file_path) }}"
+                                                 class="img-md">
+                                        </a>
                                     @else
                                         <a target="_blank" href="{{ \Illuminate\Support\Facades\Storage::url($detail->file_path) }}">
                                             <i class="fas fas-file"></i> Download File
                                         </a>
                                     @endif
-                                <td>{{ $detail->jumlah }}</td>
+                                <td>{{ Number::format($detail->jumlah) }}</td>
                                 <td>
+                                    @can('edit', $reimburse)
                                     <a href="{{ route('reimburse-detail.edit', $detail->id_reimburse_detail) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                         <i class="fa fa-lg fa-fw fa-pen"></i>
                                     </a>
@@ -119,6 +122,7 @@
                                             <i class="fa fa-lg fa-fw fa-trash"></i>
                                         </button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

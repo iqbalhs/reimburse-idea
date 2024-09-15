@@ -18,6 +18,7 @@
         'Status',
         'HR',
         'Finance',
+        'Bukti Pembayaran',
         ['label' => 'Actions', 'no-export' => true, 'width' => 5],
     ];
 
@@ -54,6 +55,13 @@
                                 <td>{{ $reimburse->status_staff }}</td>
                                 <td>{{ $reimburse->status_hr }}</td>
                                 <td>{{ $reimburse->status_finance }}</td>
+                                <td>
+                                    @if($reimburse->transfer_proof !== null)
+                                        <a target="_blank" href="{{ \Illuminate\Support\Facades\Storage::url($reimburse->transfer_proof) }}">
+                                            <i class="fas fas-file"></i> Download File
+                                        </a>
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="{{ route('reimburse.show', $reimburse->kode_reimburse) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                         <i class="fa fa-lg fa-fw fa-eye"></i>

@@ -46,7 +46,7 @@ class ReimburseDetailController extends Controller
         ]);
         $reimburseDetail = new ReimburseDetail();
         $reimburseDetail->fill($request->all());
-        $reimburseDetail->reimburse_id = $id;
+        $reimburseDetail->kode_reimburse = $id;
         /** @var UploadedFile $file */
         $file = $request->file;
         $reimburseDetail->file_path = $file->storeAs('berkas', sprintf("%s.%s", uniqid('file'), $file->extension()));

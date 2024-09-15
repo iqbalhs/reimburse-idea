@@ -49,14 +49,12 @@
 {{-- Add common Javascript/Jquery code --}}
 
 @push('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.9/jquery.inputmask.min.js" integrity="sha512-F5Ul1uuyFlGnIT1dk2c4kB4DBdi5wnBJjVhL7gQlGh46Xn0VhvD8kgxLtjdZ5YN83gybk/aASUAlpdoWUjRR3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-
-        $(document).ready(function() {
-            // Add your common script logic here...
-        });
-
+        $('#jumlah').inputmask()
     </script>
 @endpush
+
 
 {{-- Add common CSS customizations --}}
 
