@@ -50,6 +50,7 @@
                                        type="text"
                                        name="nip"
                                        placeholder="0001"
+                                       value="{{ $kode }}"
                                        class="input-group form-control @error('nip') is-invalid @enderror">
                                 @error('nip')
                                 <span id="nip-error" class="error invalid-feedback">{{ $message }}</span>

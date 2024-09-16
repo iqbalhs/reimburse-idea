@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reimburse;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -27,7 +28,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        $latestIdea = Reimburse::orderBy('created_at', 'desc')->first();
+        $lastNumber = intval(str_replace('IDEA-', '', $latestIdea->nip));
+        $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+        $kode = 'IDEA-' . $newNumber;
+        return view('user.create', compact('kode'));
     }
 
     /**
