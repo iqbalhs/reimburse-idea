@@ -39,11 +39,14 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Daftar Reimburse</h3>
+                    @can('create', \App\Models\Reimburse::class)
                     <a href="{{ route('reimburse.create') }}" class="float-right btn btn-primary"><i class="fa fa-plus"></i></a>
-
+                    @endcan
                 </div>
                 <div class="card-body">
+                    @can('create', \App\Models\Reimburse::class)
                     <a href="{{ route('reimburse.report') }}" class="float-left mb-5 btn btn-success"><i class="fa fa-print"></i> Laporan</a>
+                    @endcan
                     {{-- Minimal example / fill data using the component slot --}}
                     <x-adminlte-datatable id="table1" :heads="$heads">
                         @foreach($reimburses as $reimburse)
