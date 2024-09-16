@@ -12,7 +12,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Tambah Kategori</h3>
+                    <h3 class="card-title">Upload Bukti Transfer</h3>
                 </div>
                 <form method="POST" action="{{ route('reimburse.store-proof', $reimburse) }}" enctype="multipart/form-data">
                     <div class="card-body">
