@@ -20,8 +20,12 @@
         'HR',
         'Finance',
         'Bukti Pembayaran',
-        ['label' => 'Actions', 'no-export' => true, 'width' => 5],
     ];
+
+    if (auth()->user()->hasRole(\App\Enums\RolesEnum::HR)) {
+        $heads[] = 'Bukti Pembayaran';
+    }
+    $heads[] = ['label' => 'Actions', 'no-export' => true, 'width' => 5];
 
     $btnEdit = '<a class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                     <i class="fa fa-lg fa-fw fa-pen"></i>
@@ -45,7 +49,7 @@
                     @endcan
                 </div>
                 <div class="card-body">
-                    @can('create', \App\Models\Reimburse::class)
+                    @can('create', \App\Models\Reimburse::class && !auth()->user()->hasRole(\App\Enums\RolesEnum::HR))
                     <a href="{{ route('reimburse.report') }}" class="float-left mb-5 btn btn-success"><i class="fa fa-print"></i> Laporan</a>
                     @endcan
                     {{-- Minimal example / fill data using the component slot --}}
@@ -62,13 +66,15 @@
                                 <td>{{ $reimburse->status_staff }}</td>
                                 <td>{{ $reimburse->status_hr }}</td>
                                 <td>{{ $reimburse->status_finance }}</td>
-                                <td>
-                                    @if($reimburse->transfer_proof !== null)
-                                        <a target="_blank" href="{{ \Illuminate\Support\Facades\Storage::url($reimburse->transfer_proof) }}">
-                                            <i class="fas fas-file"></i> Download File
-                                        </a>
-                                    @endif
-                                </td>
+                                @if(!auth()->user()->hasRole(\App\Enums\RolesEnum::HR))
+                                    <td>
+                                        @if($reimburse->transfer_proof !== null)
+                                            <a target="_blank" href="{{ \Illuminate\Support\Facades\Storage::url($reimburse->transfer_proof) }}">
+                                                <i class="fas fas-file"></i> Download File
+                                            </a>
+                                        @endif
+                                    </td>
+                                @endif
                                 <td>
                                     <a href="{{ route('reimburse.show', $reimburse->kode_reimburse) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                         <i class="fa fa-lg fa-fw fa-eye"></i>
