@@ -58,7 +58,6 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'nip' => 'IDEA-' .  $request->get('nip')
         ]);
-        dd($request->get('role'));
         $user->assignRole($request->get('role'));
 
         event(new Registered($user));

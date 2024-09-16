@@ -14,6 +14,8 @@ class User extends Authenticatable
 
     protected $primaryKey = 'nip';
 
+    public $incrementing = false;
+
     protected $keyType = 'string';
 
     /**
@@ -56,4 +58,11 @@ class User extends Authenticatable
         return $this->getRoleNames()->implode(',');
     }
 
+    /**
+     * Override getKey() to return 'nip' instead of 'id'.
+     */
+    public function getKey()
+    {
+        return $this->nip;
+    }
 }
