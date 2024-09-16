@@ -48,7 +48,7 @@
                     @endcan
                 </div>
                 <div class="card-body">
-                    @can('create', \App\Models\Reimburse::class && !auth()->user()->hasRole(\App\Enums\RolesEnum::HR))
+                    @can(!auth()->user()->hasRole(\App\Enums\RolesEnum::HR))
                     <a href="{{ route('reimburse.report') }}" class="float-left mb-5 btn btn-success"><i class="fa fa-print"></i> Laporan</a>
                     @endcan
                     {{-- Minimal example / fill data using the component slot --}}
