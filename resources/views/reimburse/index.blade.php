@@ -21,7 +21,7 @@
         'Finance',
     ];
 
-    if (auth()->user()->hasRole(\App\Enums\RolesEnum::HR)) {
+    if (!auth()->user()->hasRole(\App\Enums\RolesEnum::HR)) {
         $heads[] = 'Bukti Pembayaran';
     }
     $heads[] = ['label' => 'Actions', 'no-export' => true, 'width' => 5];
