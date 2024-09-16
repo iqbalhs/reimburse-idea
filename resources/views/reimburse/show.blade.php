@@ -89,7 +89,9 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Detail Berkas</h3>
+                    @can('sendReimburse', $reimburse)
                     <a href="{{ route('reimburse-detail.create', $reimburse) }}" class="float-right btn btn-primary"><i class="fa fa-plus"></i></a>
+                    @endcan
                 </div>
                 <div class="card-body">
                     {{-- Minimal example / fill data using the component slot --}}
@@ -111,7 +113,7 @@
                                     @endif
                                 <td>{{ Number::format($detail->jumlah) }}</td>
                                 <td>
-                                    @can('edit', $reimburse)
+                                    @can('sendReimburse', $reimburse)
                                     <a href="{{ route('reimburse-detail.edit', $detail->id_reimburse_detail) }} " class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                         <i class="fa fa-lg fa-fw fa-pen"></i>
                                     </a>

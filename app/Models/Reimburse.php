@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\StatusFinance;
 use App\Enums\StatusHr;
 use App\Enums\StatusKaryawan;
+use App\Models\Scopes\NipScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -32,6 +33,11 @@ class Reimburse extends Model
 	    'status_hr',
 	    'status_finance',
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new NipScope);
+    }
 
     public function generateKode()
     {
