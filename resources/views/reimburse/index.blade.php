@@ -53,7 +53,7 @@
                         @foreach($reimburses as $reimburse)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $reimburse->karyawan->name }}</td>
+                                <td>{{ @$reimburse->karyawan->name }}</td>
                                 <td>{{ $reimburse->kode_reimburse }}</td>
                                 <td>{{ $reimburse->title }}</td>
                                 <td>{{ @$reimburse->kategori->name }}</td>
