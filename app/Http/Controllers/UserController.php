@@ -28,10 +28,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $latestIdea = Reimburse::orderBy('created_at', 'desc')->first();
+        $latestIdea = User::orderBy('created_at', 'desc')->first();
         $lastNumber = intval(str_replace('IDEA-', '', $latestIdea->nip));
-        $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
-        $kode = 'IDEA-' . $newNumber;
+        $kode = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
         return view('user.create', compact('kode'));
     }
 
@@ -59,6 +58,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'nip' => 'IDEA-' .  $request->get('nip')
         ]);
+        dd($request->get('role'));
         $user->assignRole($request->get('role'));
 
         event(new Registered($user));
