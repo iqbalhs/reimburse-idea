@@ -32,11 +32,15 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Reimburse - {{ $reimburse->kode_reimburse }}</h3>
+                    <h3 class="card-title">Reimburse - {{ $reimburse->title }}</h3>
                 </div>
                 <div class="card-body">
                     <a href="{{ route('reimburse.index') }}" class="btn btn-warning mb-1">Kembali</a>
                     <table class="table table-bordered table-sm">
+                        <tr>
+                            <th>Staff</th>
+                            <td> {{ $reimburse->karyawan->name }} </td>
+                        </tr>
                         <tr>
                             <th>Kode</th>
                             <td> {{ $reimburse->kode_reimburse }} </td>

@@ -132,4 +132,9 @@ class Reimburse extends Model
                 ]
             );
     }
+
+    public function karyawan()
+    {
+        return $this->belongsTo(User::class, 'nip', 'nip');
+    }
 }
