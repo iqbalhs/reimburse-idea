@@ -19,7 +19,6 @@
         'Status',
         'HR',
         'Finance',
-        'Bukti Pembayaran',
     ];
 
     if (auth()->user()->hasRole(\App\Enums\RolesEnum::HR)) {
