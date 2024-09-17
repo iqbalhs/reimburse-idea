@@ -48,9 +48,9 @@
                     @endcan
                 </div>
                 <div class="card-body">
-                    @can(!auth()->user()->hasRole(\App\Enums\RolesEnum::HR))
+                    @if(!auth()->user()->hasRole(\App\Enums\RolesEnum::HR))
                     <a href="{{ route('reimburse.report') }}" class="float-left mb-5 btn btn-success"><i class="fa fa-print"></i> Laporan</a>
-                    @endcan
+                    @endif
                     {{-- Minimal example / fill data using the component slot --}}
                     <x-adminlte-datatable id="table1" :heads="$heads">
                         @foreach($reimburses as $reimburse)
