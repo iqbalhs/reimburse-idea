@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use Spatie\LaravelPdf\Facades\Pdf;
 
 class ReimburseController extends Controller
 {
@@ -204,8 +205,12 @@ class ReimburseController extends Controller
             'category_id' => ['nullable'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
+            'format' => ['required'],
         ]);
+        if ($request->get('format') == 'PDF') {
+            return $this->exportPdf($request);
 
+        }
         $this->exportExcel($request);
     }
 
@@ -258,5 +263,60 @@ class ReimburseController extends Controller
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment; filename="'. urlencode($fileName).'"');
         $writer->save('php://output');
+    }
+
+    private function exportPdf(Request $request)
+    {
+        $reimburses = Reimburse::query();
+        $reimburses->whereBetween(
+            column: 'date',
+            values: [$request->start_date, $request->end_date]
+        );
+        if (!empty($request->proyek_id)) {
+            $reimburses->where('proyek_id', $request->proyek_id);
+        }
+        if (!empty($request->category_id)) {
+            $reimburses->where('category_id', $request->category_id);
+        }
+
+        $mpdf = new \Mpdf\Mpdf();
+        $i = 1;
+        $html = <<<HTML
+<h1><b>Laporan Reimburse</b></h1><br><br>
+
+
+<table style="border: 1px solid">
+    <tr>
+        <th>NO</th>
+        <th>Kode</th>
+        <th>Judul</th>
+        <th>Kategori</th>
+        <th>Proyek</th>
+        <th>Jumlah</th>
+        <th>Status</th>
+        <th>HR</th>
+        <th>Finance</th>
+    </tr>
+HTML;
+        foreach ($reimburses->get() as $reimburse) {
+            $html .= "<tr>
+            <td>$i</td>
+            <td>$reimburse->kode_reimburse</td>
+            <td>$reimburse->title</td>
+            <td>{$reimburse->kategori->name}</td>
+            <td>{$reimburse->proyek->name}</td>
+            <td>$reimburse->jumlah_total</td>
+            <td>$reimburse->status_staff</td>
+            <td>$reimburse->status_hr</td>
+            <td>$reimburse->status_finance</td>
+        </tr>";
+            $i++;
+        }
+        $html .= <<<HTML
+</table>
+HTML;
+
+        $mpdf->WriteHTML($html);
+        return $mpdf->Output();
     }
 }

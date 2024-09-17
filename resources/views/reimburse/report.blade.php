@@ -63,6 +63,17 @@
                             <span id="date-error" class="error invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="format">Format</label>
+                            <select class="form-control @error('format') is-invalid @enderror"
+                                    name="format">
+                                <option value="Excel">Excel</option>
+                                <option value="PDF">PDF</option>
+                            </select>
+                            @error('format')
+                            <span id="format-error" class="error invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="card-footer">
                         <a href="{{ route('reimburse.index') }}" class="btn btn-warning">Kembali</a>
