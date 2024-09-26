@@ -39,7 +39,7 @@
                     <table class="table table-bordered table-sm">
                         <tr>
                             <th>Staff</th>
-                            <td> {{ $reimburse->karyawan->name }} </td>
+                            <td> {{ @$reimburse->karyawan->name }} </td>
                         </tr>
                         <tr>
                             <th>Kode</th>
@@ -76,11 +76,11 @@
                         </tr>
                         <tr>
                             <th>Status HR</th>
-                            <td> {{ $reimburse->status_hr }} </td>
+                            <td> {{ $reimburse->isKaryawanDraft() ? '-' : $reimburse->status_hr }} </td>
                         </tr>
                         <tr>
                             <th>Status Finance</th>
-                            <td> {{ $reimburse->status_finance }} </td>
+                            <td> {{ $reimburse->isKaryawanDraft() ? '-' :$reimburse->status_finance }} </td>
                         </tr>
                     </table>
                 </div>

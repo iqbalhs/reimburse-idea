@@ -63,8 +63,8 @@
                                 <td>{{ @$reimburse->proyek->name }}</td>
                                 <td>{{ $reimburse->jumlah_total }}</td>
                                 <td>{{ $reimburse->status_staff }}</td>
-                                <td>{{ $reimburse->status_hr }}</td>
-                                <td>{{ $reimburse->status_finance }}</td>
+                                <td>{{ $reimburse->isKaryawanDraft() ? '-' : $reimburse->status_hr }}</td>
+                                <td>{{ $reimburse->isKaryawanDraft() ? '-' : $reimburse->status_finance }}</td>
                                 @if(!auth()->user()->hasRole(\App\Enums\RolesEnum::HR))
                                     <td>
                                         @if($reimburse->transfer_proof !== null)
