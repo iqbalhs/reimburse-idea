@@ -65,15 +65,15 @@ class ReimburseController extends Controller
         ]);
 
         if($validator->fails()){
-          return response()->json(['error' => $validator->errors()->all()]);
+          return response()->json(['error' => $validator->errors()]);
         }
 
-        // $reimburse = new Reimburse();
-        // $reimburse->fill($request->all());
-        // $reimburse->nip = auth()->user()->nip;
-        // $reimburse->generateKode();
-        // $reimburse->save();
-        // return redirect()->route('reimburse.index');
+        $reimburse = new Reimburse();
+        $reimburse->fill($request->all());
+        $reimburse->nip = auth()->user()->nip;
+        $reimburse->generateKode();
+        $reimburse->save();
+        return redirect()->route('reimburse.index');
     }
 
     /**

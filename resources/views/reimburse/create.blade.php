@@ -22,11 +22,10 @@
                             name="title"
                             class="form-control @error('title') is-invalid @enderror"
                         />
-                        @error('title')
-                        <span id="title-error" class="error invalid-feedback">{{
-                            $message
-                        }}</span>
-                        @enderror
+                        <span
+                            id="title-error"
+                            class="error invalid-feedback"
+                        ></span>
                     </div>
                     <div class="form-group">
                         <label for="project_id">Proyek</label>
@@ -40,13 +39,10 @@
                             </option>
                             @endforeach
                         </select>
-                        @error('project_id')
                         <span
                             id="project_id-error"
                             class="error invalid-feedback"
-                            >{{ $message }}</span
-                        >
-                        @enderror
+                        ></span>
                     </div>
                     <div class="form-group">
                         <label for="category_id">Kategori</label>
@@ -60,13 +56,10 @@
                             </option>
                             @endforeach
                         </select>
-                        @error('category_id')
                         <span
                             id="category_id-error"
                             class="error invalid-feedback"
-                            >{{ $message }}</span
-                        >
-                        @enderror
+                        ></span>
                     </div>
                     <div class="form-group">
                         <label for="date">Tanggal</label>
@@ -76,11 +69,10 @@
                             name="date"
                             class="form-control @error('date') is-invalid @enderror"
                         />
-                        @error('date')
-                        <span id="date-error" class="error invalid-feedback">{{
-                            $message
-                        }}</span>
-                        @enderror
+                        <span
+                            id="date-error"
+                            class="error invalid-feedback"
+                        ></span>
                     </div>
                     <div class="form-group">
                         <label for="remark">Keterangan</label>
@@ -91,13 +83,10 @@
                             cols="30"
                             rows="4"
                         ></textarea>
-                        @error('remark')
                         <span
                             id="remark-error"
                             class="error invalid-feedback"
-                            >{{ $message }}</span
-                        >
-                        @enderror
+                        ></span>
                     </div>
                 </div>
             </div>
@@ -126,13 +115,10 @@
                                                 name="archive[1][title]"
                                                 class="form-control @error('title') is-invalid @enderror"
                                             />
-                                            @error('title')
                                             <span
-                                                id="title-error"
+                                                id="archive-1-title-error"
                                                 class="error invalid-feedback"
-                                                >{{ $message }}</span
-                                            >
-                                            @enderror
+                                            ></span>
                                         </div>
                                     </div>
                                     <div class="col-4">
@@ -146,13 +132,10 @@
                                                 data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digitsOptional': true, 'placeholder': '0', 'removeMaskOnSubmit': true"
                                                 class="form-control @error('jumlah') is-invalid @enderror"
                                             />
-                                            @error('jumlah')
                                             <span
-                                                id="jumlah-error"
+                                                id="archive-1-jumlah-error"
                                                 class="error invalid-feedback"
-                                                >{{ $message }}</span
-                                            >
-                                            @enderror
+                                            ></span>
                                         </div>
                                     </div>
                                     <div class="col-4">
@@ -165,13 +148,10 @@
                                                 name="archive[1][file]"
                                                 class="form-control @error('file') is-invalid @enderror"
                                             />
-                                            @error('file')
                                             <span
-                                                id="file-error"
+                                                id="archive-1-file-error"
                                                 class="error invalid-feedback"
-                                                >{{ $message }}</span
-                                            >
-                                            @enderror
+                                            ></span>
                                         </div>
                                     </div>
                                 </div>
@@ -238,11 +218,7 @@
                                         name="archive[${itemId}][title]"
                                         class="form-control @error('title') is-invalid @enderror"
                                     />
-                                    @error('title')
-                                    <span id="title-error" class="error invalid-feedback">{{
-                                        $message
-                                    }}</span>
-                                    @enderror
+                                    <span id="archive-${itemId}-title-error" class="error invalid-feedback"></span>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -254,11 +230,7 @@
                                         data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digitsOptional': true, 'placeholder': '0', 'removeMaskOnSubmit': true"
                                         class="form-control @error('jumlah') is-invalid @enderror"
                                     />
-                                    @error('jumlah')
-                                    <span id="jumlah-error" class="error invalid-feedback">{{
-                                        $message
-                                    }}</span>
-                                    @enderror
+                                    <span id="archive-${itemId}-jumlah-error" class="error invalid-feedback"></span>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -269,11 +241,7 @@
                                         name="archive[${itemId}][file]"
                                         class="form-control @error('file') is-invalid @enderror"
                                     />
-                                    @error('file')
-                                    <span id="file-error" class="error invalid-feedback">{{
-                                        $message
-                                    }}</span>
-                                    @enderror
+                                    <span id="archive-${itemId}-file-error" class="error invalid-feedback"></span>
                                 </div>
                             </div>
                         </div>
@@ -317,7 +285,6 @@
 
             const form = $("#add-reimburse")[0];
             const formData = new FormData(form);
-            console.log("form", form);
             $.ajax({
                 url: postURL,
                 method: "POST",
@@ -328,24 +295,23 @@
 
                 success: function (data) {
                     if (data.error) {
-                        console.log(data.error);
+                        showErrors(data.error);
                     }
                 },
             });
         });
-        // function printErrorMsg(msg) {
-        //     $(".print-error-msg").find("ul").html("");
 
-        //     $(".print-error-msg").css("display", "block");
-
-        //     $(".print-success-msg").css("display", "none");
-
-        //     $.each(msg, function (key, value) {
-        //         $(".print-error-msg")
-        //             .find("ul")
-        //             .append("<li>" + value + "</li>");
-        //     });
-        // }
+        function showErrors(errors) {
+            Object.keys(errors).forEach((field) => {
+                const fieldId = field.includes("archive")
+                    ? field.replaceAll(".", "-")
+                    : field;
+                const errorMessage = field.includes("archive")
+                    ? errors[field][0].replace(/archive[.]\d[.]/g, "")
+                    : errors[field][0];
+                $(`#${fieldId}-error`).addClass("d-block").html(errorMessage);
+            });
+        }
     });
 </script>
 @endpush
