@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Spatie\LaravelPdf\Facades\Pdf;
+use Illuminate\Support\Facades\Validator;
 
 class ReimburseController extends Controller
 {
@@ -52,19 +53,27 @@ class ReimburseController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => ['required', 'max:50'],
             'project_id' => ['required', 'integer', 'exists:proyek,proyek_id'],
             'category_id' => ['required', 'integer', 'exists:kategori,category_id'],
             'date' => ['required', 'date'],
             'remark' => ['required', 'string', 'max:500'],
+            'archive.*.title' => 'required',
+            'archive.*.jumlah' => 'required',
+            'archive.*.file' => 'required',
         ]);
-        $reimburse = new Reimburse();
-        $reimburse->fill($request->all());
-        $reimburse->nip = auth()->user()->nip;
-        $reimburse->generateKode();
-        $reimburse->save();
-        return redirect()->route('reimburse.index');
+
+        if($validator->fails()){
+          return response()->json(['error' => $validator->errors()->all()]);
+        }
+
+        // $reimburse = new Reimburse();
+        // $reimburse->fill($request->all());
+        // $reimburse->nip = auth()->user()->nip;
+        // $reimburse->generateKode();
+        // $reimburse->save();
+        // return redirect()->route('reimburse.index');
     }
 
     /**
