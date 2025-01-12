@@ -127,6 +127,8 @@ class ReimburseController extends Controller
         /** @var Reimburse $reimburse */
         $reimburse = Reimburse::findOrFail($id);
         $reimburse->status_staff = StatusKaryawan::SENT;
+        $reimburse->status_hr = StatusHr::REVIEW;
+        $reimburse->status_finance = StatusFinance::REVIEW;
         $reimburse->save();
         return redirect()->route('reimburse.index');
     }
