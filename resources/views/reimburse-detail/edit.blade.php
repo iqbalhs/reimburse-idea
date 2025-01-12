@@ -32,8 +32,9 @@
                         <div class="form-group">
                             <label for="jumlah">Jumlah</label>
                             <input id="jumlah"
-                                   type="number"
+                                   type="text"
                                    name="jumlah"
+                                   data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digitsOptional': true, 'placeholder': '0', 'removeMaskOnSubmit': true, 'rightAlign': false"
                                    value="{{ $reimburseDetail->jumlah }}"
                                    class="form-control @error('jumlah') is-invalid @enderror">
                             @error('jumlah')
