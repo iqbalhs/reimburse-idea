@@ -6,6 +6,7 @@ use App\Enums\StatusFinance;
 use App\Enums\StatusHr;
 use App\Enums\StatusKaryawan;
 use App\Models\Reimburse;
+use App\Models\ReimburseDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -38,14 +39,20 @@ class DashboardController extends Controller
         }
 
         // Query to count reimbursements grouped by category
-        $reimbursementsByCategory = Reimburse::select('category_id', DB::raw('count(*) as total'))
-            ->groupBy('category_id')
-            ->with('kategori') // Eager load the related category
-            ->get();
-
+        // $reimbursementsByCategory = ReimburseDetail::select('category_id', DB::raw('count(*) as total'))
+        //     ->groupBy('category_id')
+        //     ->get();
+        $reimbursementsByCategory = ReimburseDetail::select(DB::raw('reimburse_detail.category_id, COUNT(*) AS total'))
+        ->join('kategori', 'kategori.category_id', '=', 'reimburse_detail.category_id')
+        ->groupBy('kategori.category_id')->get();
+        // $reimbursementsByCategory->load('kategori');
+// 
+        // dd($reimbursementsByCategory);
         // Prepare the labels (category names) and data (count of reimbursements per category)
         $pieLabels = [];
         $pieData = [];
+
+        // dd($reimbursementsByCategory);
 
         foreach ($reimbursementsByCategory as $reimburse) {
             $pieLabels[] = $reimburse->kategori->name; // Assuming 'name' is the category's name column

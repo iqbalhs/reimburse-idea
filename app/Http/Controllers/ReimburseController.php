@@ -97,7 +97,6 @@ class ReimburseController extends Controller
     {
         $reimburses = Reimburse::with('reimburseDetail.kategori')->where('kode_reimburse', $reimburse->kode_reimburse)->first();
 
-        // dd($reimburse->reimburseDetail);
         return view('reimburse.show', ['reimburse' => $reimburses]);
     }
 
