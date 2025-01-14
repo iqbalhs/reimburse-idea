@@ -9,6 +9,7 @@ use App\Enums\StatusKaryawan;
 use App\Models\Kategori;
 use App\Models\Proyek;
 use App\Models\Reimburse;
+use App\Models\ReimburseDetail;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
@@ -56,12 +57,11 @@ class ReimburseController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => ['required', 'max:50'],
             'project_id' => ['required', 'integer', 'exists:proyek,proyek_id'],
-            'category_id' => ['required', 'integer', 'exists:kategori,category_id'],
             'date' => ['required', 'date'],
             'remark' => ['required', 'string', 'max:500'],
-            'archive.*.title' => 'required',
-            'archive.*.jumlah' => 'required',
-            'archive.*.file' => 'required',
+            'reimburse_detail.*.category_id' => 'required',
+            'reimburse_detail.*.jumlah' => 'required',
+            'reimburse_detail.*.file' => 'required',
         ]);
 
         if($validator->fails()){
@@ -73,7 +73,21 @@ class ReimburseController extends Controller
         $reimburse->nip = auth()->user()->nip;
         $reimburse->generateKode();
         $reimburse->save();
-        return redirect()->route('reimburse.index');
+        $reimburse->refresh();
+
+        foreach ($validator->valid()['reimburse_detail'] as $detail) {
+            $reimburseDetail = new ReimburseDetail();
+            $reimburseDetail->file_path = $detail['file']->storeAs('berkas', sprintf("%s.%s", uniqid('file'), $detail['file']->extension()));
+            $reimburseDetail->kode_reimburse = $reimburse->kode_reimburse;
+            $reimburseDetail->category_id = $detail['category_id'];
+            $reimburseDetail->jumlah = $detail['jumlah'];
+            $reimburseDetail->save();
+        }
+
+        return response()->json([
+            'message' => 'Reimburse created successfully!',
+            'redirect_url' => route('reimburse.index'),
+        ]);
     }
 
     /**
@@ -81,7 +95,10 @@ class ReimburseController extends Controller
      */
     public function show(Reimburse $reimburse)
     {
-        return view('reimburse.show', ['reimburse' => $reimburse]);
+        $reimburses = Reimburse::with('reimburseDetail.kategori')->where('kode_reimburse', $reimburse->kode_reimburse)->first();
+
+        // dd($reimburse->reimburseDetail);
+        return view('reimburse.show', ['reimburse' => $reimburses]);
     }
 
     /**

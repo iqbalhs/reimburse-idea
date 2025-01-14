@@ -36,7 +36,7 @@ class ReimburseDetailController extends Controller
         /** @var Reimburse $reimburse */
         $reimburse = Reimburse::findOrFail($id);
         $request->validate([
-            'title' => ['required', 'max:50'],
+            'category_id' => ['required', 'max:50'],
             'file' => [
                 'required',
                 File::types(['pdf', 'jpeg', 'jpg', 'png'])

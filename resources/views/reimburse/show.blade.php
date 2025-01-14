@@ -9,7 +9,7 @@
 @php
     $heads = [
         'No',
-        'Judul',
+        'Kategori',
         'Berkas',
         'Jumlah',
         ['label' => 'Actions', 'no-export' => true, 'width' => 5],
@@ -48,10 +48,6 @@
                         <tr>
                             <th>Proyek</th>
                             <td> {{ $reimburse->proyek->name }} </td>
-                        </tr>
-                        <tr>
-                            <th>Ketegori</th>
-                            <td> {{ $reimburse->kategori->name }} </td>
                         </tr>
                         <tr>
                             <th>Tanggal</th>
@@ -103,7 +99,7 @@
                         @foreach($reimburse->reimburseDetail as $detail)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $detail->title }}</td>
+                                <td>{{ $detail->kategori->name }}</td>
                                 <td>
                                     @if($detail->isImage())
                                         <a href="{{ \Illuminate\Support\Facades\Storage::url($detail->file_path) }}" target="_blank">

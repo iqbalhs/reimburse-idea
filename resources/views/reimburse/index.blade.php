@@ -13,7 +13,6 @@
         'Karyawan',
         'Kode',
         'Judul',
-        'Kategori',
         'Proyek',
         'Jumlah',
         'Status',
@@ -59,7 +58,6 @@
                                 <td>{{ @$reimburse->karyawan->name }}</td>
                                 <td>{{ $reimburse->kode_reimburse }}</td>
                                 <td>{{ $reimburse->title }}</td>
-                                <td>{{ @$reimburse->kategori->name }}</td>
                                 <td>{{ @$reimburse->proyek->name }}</td>
                                 <td>{{ $reimburse->jumlah_total }}</td>
                                 <td>{{ $reimburse->status_staff }}</td>

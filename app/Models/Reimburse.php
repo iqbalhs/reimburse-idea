@@ -19,12 +19,13 @@ class Reimburse extends Model
 
     protected $keyType = 'string';
 
+    public $incrementing = false;
+
     protected $table = 'reimburse';
 
     protected $fillable = [
         'kode_reimburse',
 	    'project_id',
-	    'category_id',
 	    'staff_id',
 	    'date',
 	    'title',
@@ -42,11 +43,6 @@ class Reimburse extends Model
     public function generateKode()
     {
         $this->kode_reimburse = 'RMB-' . date('YmdHis') . random_int(1, 9);
-    }
-
-    public function kategori()
-    {
-        return $this->hasOne(Kategori::class, 'category_id', 'category_id');
     }
 
 

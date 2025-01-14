@@ -45,23 +45,6 @@
                         ></span>
                     </div>
                     <div class="form-group">
-                        <label for="category_id">Kategori</label>
-                        <select
-                            class="form-control @error('category_id') is-invalid @enderror"
-                            name="category_id"
-                        >
-                            @foreach($categories as $category)
-                            <option value="{{ $category->category_id }}">
-                                {{ $category->name }}
-                            </option>
-                            @endforeach
-                        </select>
-                        <span
-                            id="category_id-error"
-                            class="error invalid-feedback"
-                        ></span>
-                    </div>
-                    <div class="form-group">
                         <label for="date">Tanggal</label>
                         <input
                             id="date"
@@ -106,50 +89,52 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label for="archive[1][title]"
-                                                >Judul</label
+                                            <label for="reimburse_detail[1][category_id]">Kategori</label>
+                                            <select
+                                                class="form-control @error('category_id') is-invalid @enderror"
+                                                name="reimburse_detail[1][category_id]"
                                             >
-                                            <input
-                                                id="title"
-                                                type="text"
-                                                name="archive[1][title]"
-                                                class="form-control @error('title') is-invalid @enderror"
-                                            />
+                                                @foreach($categories as $category)
+                                                <option value="{{ $category->category_id }}">
+                                                    {{ $category->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
                                             <span
-                                                id="archive-1-title-error"
+                                                id="reimburse_detail-1-category_id-error"
                                                 class="error invalid-feedback"
                                             ></span>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label for="archive[1][jumlah]"
+                                            <label for="reimburse_detail[1][jumlah]"
                                                 >Jumlah</label
                                             >
                                             <input
                                                 type="text"
-                                                name="archive[1][jumlah]"
+                                                name="reimburse_detail[1][jumlah]"
                                                 data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digitsOptional': true, 'placeholder': '0', 'removeMaskOnSubmit': true"
                                                 class="form-control @error('jumlah') is-invalid @enderror"
                                             />
                                             <span
-                                                id="archive-1-jumlah-error"
+                                                id="reimburse_detail-1-jumlah-error"
                                                 class="error invalid-feedback"
                                             ></span>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label for="archive[1][file]"
+                                            <label for="reimburse_detail[1][file]"
                                                 >Berkas</label
                                             >
                                             <input
                                                 type="file"
-                                                name="archive[1][file]"
+                                                name="reimburse_detail[1][file]"
                                                 class="form-control @error('file') is-invalid @enderror"
                                             />
                                             <span
-                                                id="archive-1-file-error"
+                                                id="reimburse_detail-1-file-error"
                                                 class="error invalid-feedback"
                                             ></span>
                                         </div>
@@ -212,36 +197,44 @@
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="archive[${itemId}][title]">Judul</label>
-                                    <input
-                                        type="text"
-                                        name="archive[${itemId}][title]"
-                                        class="form-control @error('title') is-invalid @enderror"
-                                    />
-                                    <span id="archive-${itemId}-title-error" class="error invalid-feedback"></span>
+                                    <label for="reimburse_detail[${itemId}][category_id]">Kategori</label>
+                                    <select
+                                        class="form-control @error('category_id') is-invalid @enderror"
+                                        name="reimburse_detail[${itemId}][category_id]"
+                                    >
+                                        @foreach($categories as $category)
+                                        <option value="{{ $category->category_id }}">
+                                            {{ $category->name }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    <span
+                                        id="reimburse_detail-${itemId}-category_id-error"
+                                        class="error invalid-feedback"
+                                    ></span>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="archive[${itemId}][jumlah]">Jumlah</label>
+                                    <label for="reimburse_detail[${itemId}][jumlah]">Jumlah</label>
                                     <input
                                         type="text"
-                                        name="archive[${itemId}][jumlah]"
+                                        name="reimburse_detail[${itemId}][jumlah]"
                                         data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digitsOptional': true, 'placeholder': '0', 'removeMaskOnSubmit': true"
                                         class="form-control @error('jumlah') is-invalid @enderror"
                                     />
-                                    <span id="archive-${itemId}-jumlah-error" class="error invalid-feedback"></span>
+                                    <span id="reimburse_detail-${itemId}-jumlah-error" class="error invalid-feedback"></span>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="archive[${itemId}][file]">Berkas</label>
+                                    <label for="reimburse_detail[${itemId}][file]">Berkas</label>
                                     <input
                                         type="file"
-                                        name="archive[${itemId}][file]"
+                                        name="reimburse_detail[${itemId}][file]"
                                         class="form-control @error('file') is-invalid @enderror"
                                     />
-                                    <span id="archive-${itemId}-file-error" class="error invalid-feedback"></span>
+                                    <span id="reimburse_detail-${itemId}-file-error" class="error invalid-feedback"></span>
                                 </div>
                             </div>
                         </div>
@@ -262,8 +255,10 @@
                 </div>
             `);
         });
-        $(".remove-reimburse-item").click(function () {
+        $(document).on("click", ".remove-reimburse-item", function () {
+            console.log('button fired')
             var buttonId = $(this).attr("id");
+            console.log('buttonId', buttonId)
             $(`#item-${buttonId}`).remove();
 
             const detailItems = $("#dynamic-field").children();
@@ -294,6 +289,8 @@
                 contentType: false,
 
                 success: function (data) {
+                    window.location.href = data.redirect_url
+                    // console.log('data', data)
                     if (data.error) {
                         showErrors(data.error);
                     }
@@ -303,11 +300,11 @@
 
         function showErrors(errors) {
             Object.keys(errors).forEach((field) => {
-                const fieldId = field.includes("archive")
+                const fieldId = field.includes("reimburse_detail")
                     ? field.replaceAll(".", "-")
                     : field;
-                const errorMessage = field.includes("archive")
-                    ? errors[field][0].replace(/archive[.]\d[.]/g, "")
+                const errorMessage = field.includes("reimburse_detail")
+                    ? errors[field][0].replace(/reimburse_detail[.]\d[.]/g, "")
                     : errors[field][0];
                 $(`#${fieldId}-error`).addClass("d-block").html(errorMessage);
             });

@@ -15,14 +15,19 @@ class ReimburseDetail extends Model
     protected $primaryKey = 'id_reimburse_detail';
 
     protected $fillable = [
-        'title',
+        'category_id',
         'jumlah',
         'file_path',
     ];
 
     public function reimburse()
     {
-        return $this->hasOne(Reimburse::class, 'kode_reimburse', 'kode_reimburse');
+        return $this->belongsTo(Reimburse::class, 'kode_reimburse', 'kode_reimburse');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'category_id', 'category_id');
     }
 
     public function isImage()
