@@ -83,7 +83,7 @@ class ReimburseController extends Controller
             $reimburseDetail->jumlah = $detail['jumlah'];
             $reimburseDetail->save();
         }
-
+        $reimburse->updateJumlah();
         return response()->json([
             'message' => 'Reimburse created successfully!',
             'redirect_url' => route('reimburse.index'),
