@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use App\Models\Reimburse;
 use App\Models\ReimburseDetail;
 use Illuminate\Http\Request;
@@ -25,7 +26,10 @@ class ReimburseDetailController extends Controller
     public function create($id)
     {
         $reimburse = Reimburse::findOrFail($id);
-        return view('reimburse-detail.create', ['reimburse' => $reimburse]);
+        return view('reimburse-detail.create', [
+            'reimburse' => $reimburse,
+            'categories' => Kategori::all()
+        ]);
     }
 
     /**
@@ -69,7 +73,10 @@ class ReimburseDetailController extends Controller
     public function edit($id)
     {
         $reimburseDetail = ReimburseDetail::findOrFail($id);
-        return view('reimburse-detail.edit', ['reimburseDetail' => $reimburseDetail]);
+        return view('reimburse-detail.edit', [
+            'reimburseDetail' => $reimburseDetail,
+            'categories' => Kategori::all()
+        ]);
     }
 
     /**
@@ -81,7 +88,7 @@ class ReimburseDetailController extends Controller
         /** @var Reimburse $reimburse */
         $reimburse = $reimburseDetail->reimburse;
         $request->validate([
-            'title' => ['required', 'max:50'],
+            'category_id' => ['required', 'max:50'],
             'file' => [
                 'nullable',
                 File::types(['pdf', 'jpeg', 'jpg', 'png'])
@@ -92,6 +99,7 @@ class ReimburseDetailController extends Controller
         $reimburseDetail->fill([
             'title' => $request->get('title'),
             'jumlah' => $request->get('jumlah'),
+            'category_id' => $request->get('category_id'),
         ]);
         /** @var UploadedFile $file */
         $file = $request->file;

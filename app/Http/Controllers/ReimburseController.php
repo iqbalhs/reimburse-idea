@@ -251,9 +251,6 @@ class ReimburseController extends Controller
         if (!empty($request->proyek_id)) {
             $reimburses->where('proyek_id', $request->proyek_id);
         }
-        if (!empty($request->category_id)) {
-            $reimburses->where('category_id', $request->category_id);
-        }
         clock($request->all());
         $spreadsheet = new Spreadsheet();
 
@@ -264,24 +261,22 @@ class ReimburseController extends Controller
         $sheet->setCellValue('A2', 'NO')
             ->setCellValue('B2', 'Kode')
             ->setCellValue('C2', 'Judul')
-            ->setCellValue('D2', 'Kategori')
-            ->setCellValue('E2', 'Proyek')
-            ->setCellValue('F2', 'Jumlah')
-            ->setCellValue('G2', 'Status')
-            ->setCellValue('H2', 'HR')
-            ->setCellValue('I2', 'Finance');
+            ->setCellValue('D2', 'Proyek')
+            ->setCellValue('E2', 'Jumlah')
+            ->setCellValue('F2', 'Status')
+            ->setCellValue('G2', 'HR')
+            ->setCellValue('H2', 'Finance');
         $row = 3;
         $i = 1;
         foreach ($reimburses->get() as $reimburse) {
             $sheet->setCellValue("A$row", $i++)
                 ->setCellValue("B$row", $reimburse->kode_reimburse)
                 ->setCellValue("C$row", $reimburse->title)
-                ->setCellValue("D$row", $reimburse->kategori->name)
-                ->setCellValue("E$row", $reimburse->proyek->name)
-                ->setCellValue("F$row", $reimburse->jumlah_total)
-                ->setCellValue("G$row", $reimburse->status_staff)
-                ->setCellValue("H$row", $reimburse->status_hr)
-                ->setCellValue("I$row", $reimburse->status_finance);
+                ->setCellValue("D$row", $reimburse->proyek->name)
+                ->setCellValue("E$row", $reimburse->jumlah_total)
+                ->setCellValue("F$row", $reimburse->status_staff)
+                ->setCellValue("G$row", $reimburse->status_hr)
+                ->setCellValue("H$row", $reimburse->status_finance);
             $row++;
         }
 
@@ -317,7 +312,6 @@ class ReimburseController extends Controller
         <th>NO</th>
         <th>Kode</th>
         <th>Judul</th>
-        <th>Kategori</th>
         <th>Proyek</th>
         <th>Jumlah</th>
         <th>Status</th>
@@ -330,7 +324,6 @@ HTML;
             <td>$i</td>
             <td>$reimburse->kode_reimburse</td>
             <td>$reimburse->title</td>
-            <td>{$reimburse->kategori->name}</td>
             <td>{$reimburse->proyek->name}</td>
             <td>$reimburse->jumlah_total</td>
             <td>$reimburse->status_staff</td>

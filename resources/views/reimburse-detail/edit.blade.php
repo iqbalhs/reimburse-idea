@@ -19,14 +19,15 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="title">Judul</label>
-                            <input id="title"
-                                   type="text"
-                                   name="title"
-                                   value="{{ $reimburseDetail->title }}"
-                                   class="form-control @error('title') is-invalid @enderror">
-                            @error('title')
-                            <span id="title-error" class="error invalid-feedback">{{ $message }}</span>
+                            <label for="category_id">Kategori</label>
+                            <select class="form-control @error('category_id') is-invalid @enderror"
+                                    name="category_id">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->category_id }}" @if($category->id === $reimburseDetail->category_id) selected @endif>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                            <span id="category_id-error" class="error invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group">

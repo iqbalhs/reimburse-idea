@@ -31,19 +31,6 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="category_id">Kategori</label>
-                            <select class="form-control @error('category_id') is-invalid @enderror"
-                                    name="category_id">
-                                <option value="">- Semua -</option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->category_id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('category_id')
-                            <span id="category_id-error" class="error invalid-feedback">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
                             <label for="start_date">Tanggal Mulai</label>
                             <input id="start_date"
                                    type="date"
